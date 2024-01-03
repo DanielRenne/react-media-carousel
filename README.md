@@ -28,3 +28,16 @@ Usage Example:
         {mediaCarousel}
         </div>
     )
+
+Props
+
+    slides: array of objects (each object is a Slide defined below)
+    theme: string ("dark" or "light")
+
+Slide fields
+
+    story: string,
+    title: string,
+    src: string (url of the photo or video),
+    mediaType: string ("photo" or "video"),
+    audioSrc: string (url of the audio for the slide.  Optional)
