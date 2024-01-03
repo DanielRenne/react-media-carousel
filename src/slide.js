@@ -3,11 +3,12 @@ import React from "react";
 export default function Slide(props) {
     const width = props.width ? props.width : 800;
     const height = props.height ? props.height : 600;
+    const theme = props.theme;
 
     return (
         <div
             style={{
-                background: "white",
+                background: theme === "dark" ? "#212121" : "white",
                 borderRadius: 15,
                 width: width,
                 height: height,
@@ -22,7 +23,7 @@ export default function Slide(props) {
             <div
                 style={{
                     width: "60%",
-                    background: "#f8f8f8",
+                    background: theme === "dark" ? "#303030" : "#f8f8f8",
                     borderTopLeftRadius: 15,
                     borderBottomLeftRadius: 15,
                     position: "relative",
@@ -120,12 +121,12 @@ export default function Slide(props) {
                     position: "relative",
                 }}
             >
-                <div style={{ height: "20%", color: "black" }} className="aligner">
+                <div style={{ height: "20%", color: theme === "dark" ? "white" : "black" }} className="aligner">
                     <div style={{ width: "100%" }}>
                         <h2>{props.title}</h2>
                     </div>
                 </div>
-                <div style={{ height: "75%", color: "black" }}>
+                <div style={{ height: "75%", color: theme === "dark" ? "white" : "black" }}>
                     <div
                         style={{
                             width: "100%",

@@ -13,6 +13,7 @@ export default function useMediaCarousel(props) {
     const [slidingRight, setSlidingRight] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(false);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const theme = props.theme ? props.theme : "light";
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
 
@@ -122,6 +123,7 @@ export default function useMediaCarousel(props) {
                         >
                             <SlideAnimation distance={width + 60}>
                                 <Slide
+                                    theme={theme}
                                     width={width}
                                     height={height}
                                     story={slides[activeSlide - 2].story}
@@ -156,6 +158,7 @@ export default function useMediaCarousel(props) {
                                 }}
                             >
                                 <Slide
+                                    theme={theme}
                                     width={width}
                                     height={height}
                                     story={slides[activeSlide - 1].story}
@@ -200,6 +203,7 @@ export default function useMediaCarousel(props) {
                                 }}
                             >
                                 <Slide
+                                    theme={theme}
                                     width={width}
                                     height={height}
                                     story={slides[activeSlide - 1].story}
@@ -277,6 +281,7 @@ export default function useMediaCarousel(props) {
                                 }}
                             >
                                 <Slide
+                                    theme={theme}
                                     width={width}
                                     height={height}
                                     story={slides[activeSlide].story}
@@ -293,6 +298,7 @@ export default function useMediaCarousel(props) {
                         <div style={{ width, height }} />
                     ) : (
                         <Slide
+                            theme={theme}
                             width={width}
                             height={height}
                             story={slides[activeSlide].story}
@@ -348,6 +354,7 @@ export default function useMediaCarousel(props) {
                                 }}
                             >
                                 <Slide
+                                    theme={theme}
                                     width={width}
                                     height={height}
                                     story={slides[activeSlide + 1].story}
@@ -433,6 +440,7 @@ export default function useMediaCarousel(props) {
                                 }}
                             >
                                 <Slide
+                                    theme={theme}
                                     width={width}
                                     height={height}
                                     story={slides[activeSlide + 1].story}
@@ -461,6 +469,7 @@ export default function useMediaCarousel(props) {
                                 distance={slidingLeft ? (width + 60) * -1 : width + 60}
                             >
                                 <Slide
+                                    theme={theme}
                                     width={width}
                                     height={height}
                                     story={slides[activeSlide + 2].story}
