@@ -1,6 +1,6 @@
 {
     "name": "react-media-carousel",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A react material ui media carousel.",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -20,6 +20,10 @@
     ],
     "author": "Daniel Renne",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DanielRenne/react-media-carousel"
+    },
     "peerDependencies": {
         "react": "^18.2.0",
         "@types/react": "^18.2.0",
