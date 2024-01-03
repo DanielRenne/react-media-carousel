@@ -7,7 +7,7 @@ import SlideAnimation from './slideAnimation';
 import NavDots from './navDots';
 
 export default function useMediaCarousel(props) {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [activeSlide, setActiveSlide] = useState(0);
     const [slidingLeft, setSlidingLeft] = useState(false);
     const [slidingRight, setSlidingRight] = useState(false);
