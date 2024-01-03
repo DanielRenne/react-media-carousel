@@ -33,6 +33,8 @@ Props
 
     slides: array of objects (each object is a Slide defined below)
     theme: string ("dark" or "light")
+    slideShow: boolean (true will automatically move to next slide in 5000 ms.)
+    slideDuration: number (override the default 5000 ms with your own slide duration.)
 
 Slide fields
 

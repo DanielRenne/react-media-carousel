@@ -14,8 +14,11 @@ export default function useMediaCarousel(props) {
     const [showRightArrow, setShowRightArrow] = useState(false);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const theme = props.theme ? props.theme : "light";
+    const slideDuration = props.slideDuration ? props.slideDuration : 5000;
+    const slideShow = props.slideShow ? props.slideShow : false;
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
+    const activeSlideshowTimer = useRef();
 
     const slides = props.slides ? props.slides : [];
     const width = 5 * (window.innerWidth / 9);
@@ -75,8 +78,33 @@ export default function useMediaCarousel(props) {
         if (slidingLeft || slidingRight) {
             activeAudioPlayer.current = undefined;
             activeVideoPlayer.current = undefined;
+            if (activeSlideshowTimer.current) {
+                clearTimeout(activeSlideshowTimer.current);
+            }
         }
     }, [slidingLeft, slidingRight]);
+
+    useEffect(() => {
+        if (activeSlideshowTimer.current) {
+            clearTimeout(activeSlideshowTimer.current);
+        }
+        if (slideShow && open) {
+            if (activeVideoPlayer.current) {
+                activeVideoPlayer.current.play();
+            } else if (activeAudioPlayer.current) {
+                activeAudioPlayer.current.play()
+            } else {
+                if (activeSlide === slides.length - 1) {
+                    return;
+                }
+                activeSlideshowTimer.current = setTimeout(() => {
+                    setSlidingLeft(true);
+                }, slideDuration)
+            }
+        }
+
+
+    }, [activeSlide, slideShow, open, slides]);
 
     useEffect(() => {
         document.addEventListener('keydown', onKeyDown);
@@ -87,6 +115,9 @@ export default function useMediaCarousel(props) {
 
     const close = React.useCallback(() => {
         setOpen(false);
+        if (activeSlideshowTimer.current) {
+            clearTimeout(activeSlideshowTimer.current);
+        }
         if (activeVideoPlayer.current) {
             activeVideoPlayer.current.pause();
         }
