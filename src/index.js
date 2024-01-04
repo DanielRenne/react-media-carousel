@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Slide from './slide';
 import SlideAnimation from './slideAnimation';
 import NavDots from './navDots';
+import PlayPause from './playPause';
 
 export default function useMediaCarousel(props) {
     const [open, setOpen] = useState(false);
@@ -13,9 +14,12 @@ export default function useMediaCarousel(props) {
     const [slidingRight, setSlidingRight] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(false);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [paused, setPaused] = useState();
+
     const theme = props.theme ? props.theme : "light";
     const slideDuration = props.slideDuration ? props.slideDuration : 5000;
     const slideShow = props.slideShow ? props.slideShow : false;
+
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
     const activeSlideshowTimer = useRef();
@@ -24,14 +28,46 @@ export default function useMediaCarousel(props) {
     const width = 5 * (window.innerWidth / 9);
     const height = 5 * (window.innerHeight / 8);
 
+    const togglePlayPause = React.useCallback(() => {
+        if (paused) {
+
+            if (activeVideoPlayer.current) {
+                activeVideoPlayer.current.play();
+            } else if (activeAudioPlayer.current) {
+                activeAudioPlayer.current.play();
+            } else {
+                setSlidingLeft(true);
+            }
+            setPaused(false);
+        } else {
+
+            if (activeVideoPlayer.current) {
+                activeVideoPlayer.current.pause();
+            } else if (activeAudioPlayer.current) {
+                activeAudioPlayer.current.pause();
+            } else {
+                if (activeSlideshowTimer.current) {
+                    clearTimeout(activeSlideshowTimer.current);
+                }
+            }
+            setPaused(true);
+        }
+
+    }, [activeVideoPlayer, activeAudioPlayer, paused]);
+
     const pauseActiveMedia = React.useCallback(() => {
         if (activeVideoPlayer.current) {
             activeVideoPlayer.current.pause();
-        }
-        if (activeAudioPlayer.current) {
+        } else if (activeAudioPlayer.current) {
             activeAudioPlayer.current.pause();
+        } else {
+            if (slideShow) {
+                if (paused) {
+                    setPaused(true);
+                }
+            }
         }
-    }, [activeVideoPlayer, activeAudioPlayer]);
+    }, [activeVideoPlayer, activeAudioPlayer, paused, slideShow]);
 
     const onKeyDown = React.useCallback(
         (event) => {
@@ -58,20 +94,33 @@ export default function useMediaCarousel(props) {
                 if (activeVideoPlayer.current) {
                     if (activeVideoPlayer.current.paused) {
                         activeVideoPlayer.current.play();
+                        setPaused(false);
                     } else {
                         activeVideoPlayer.current.pause();
+                        setPaused(true);
                     }
-                }
-                if (activeAudioPlayer.current) {
+                } else if (activeAudioPlayer.current) {
                     if (activeAudioPlayer.current.paused) {
                         activeAudioPlayer.current.play();
+                        setPaused(false);
                     } else {
                         activeAudioPlayer.current.pause();
+                        setPaused(true);
                     }
+                } else {
+                    if (slideShow) {
+                        if (paused) {
+                            setPaused(false);
+                            setSlidingLeft(true);
+                        } else {
+                            setPaused(true);
+                        }
+                    }
+
                 }
             }
         },
-        [activeSlide, close, pauseActiveMedia, slides.length],
+        [activeSlide, close, pauseActiveMedia, slides.length, paused, slideShow, activeAudioPlayer, activeVideoPlayer],
     );
 
     useEffect(() => {
@@ -89,6 +138,9 @@ export default function useMediaCarousel(props) {
             clearTimeout(activeSlideshowTimer.current);
         }
         if (slideShow && open) {
+            if (paused) {
+                return;
+            }
             if (activeVideoPlayer.current) {
                 activeVideoPlayer.current.play();
             } else if (activeAudioPlayer.current) {
@@ -104,7 +156,7 @@ export default function useMediaCarousel(props) {
         }
 
 
-    }, [activeSlide, slideShow, open, slides]);
+    }, [activeSlide, slideShow, open, slides, paused]);
 
     useEffect(() => {
         document.addEventListener('keydown', onKeyDown);
@@ -520,17 +572,44 @@ export default function useMediaCarousel(props) {
                             justifyContent: 'center',
                         }}
                     >
-                        <NavDots
-                            slides={slides}
-                            value={activeSlide}
-                            onClick={(index) => {
-                                pauseActiveMedia();
-                                activeAudioPlayer.current = undefined;
-                                activeVideoPlayer.current = undefined;
+                        <div>
+                            {
+                                slideShow ? <div style={{
+                                    marginTop: 10,
+                                    width: "100%",
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                }}>
+                                    <PlayPause
+                                        width={50}
+                                        paused={paused}
+                                        onClick={() => {
+                                            togglePlayPause();
+                                        }}
+                                        onPrev={() => {
+                                            pauseActiveMedia();
+                                            setSlidingRight(true);
+                                        }}
+                                        onNext={() => {
+                                            pauseActiveMedia();
+                                            setSlidingLeft(true);
+                                        }}
+                                    />
+                                </div> : null
+                            }
+                            <NavDots
+                                slides={slides}
+                                value={activeSlide}
+                                onClick={(index) => {
+                                    pauseActiveMedia();
+                                    activeAudioPlayer.current = undefined;
+                                    activeVideoPlayer.current = undefined;
 
-                                setActiveSlide(index);
-                            }}
-                        />
+                                    setActiveSlide(index);
+                                }}
+                            />
+
+                        </div>
                     </div>
                 </div>
             )}

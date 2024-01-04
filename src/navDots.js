@@ -5,7 +5,7 @@ export default function NavDots(props) {
     height:30px;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .dot {
