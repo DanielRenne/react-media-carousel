@@ -6,6 +6,7 @@ import Slide from './slide';
 import SlideAnimation from './slideAnimation';
 import NavDots from './navDots';
 import PlayPause from './playPause';
+import Util from "./util";
 
 export default function useMediaCarousel(props) {
     const [open, setOpen] = useState(false);
@@ -16,17 +17,20 @@ export default function useMediaCarousel(props) {
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [paused, setPaused] = useState();
 
+
     const theme = props.theme ? props.theme : "light";
     const slideDuration = props.slideDuration ? props.slideDuration : 5000;
     const slideShow = props.slideShow ? props.slideShow : false;
+    const editing = props.editing ? props.editing : false;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
     const activeSlideshowTimer = useRef();
 
     const slides = props.slides ? props.slides : [];
-    const width = 5 * (window.innerWidth / 9);
-    const height = 5 * (window.innerHeight / 8);
+    const slideGap = Util.isMobile() ? 10 : 60;
+    const width = Util.isMobile() ? window.innerWidth - 40 : 5 * (window.innerWidth / 9);
+    const height = Util.isMobile() ? window.innerHeight - 200 : 5 * (window.innerHeight / 8);
 
     const togglePlayPause = React.useCallback(() => {
         if (paused) {
@@ -196,7 +200,7 @@ export default function useMediaCarousel(props) {
                         <div
                             style={{
                                 position: 'absolute',
-                                left: slidingRight ? (width * 2 + 60) * -1 : width * 2 + 60,
+                                left: slidingRight ? (width * 2 + slideGap) * -1 : width * 2 + slideGap,
                                 top: 0,
                                 background: 'transparent',
                                 borderRadius: 15,
@@ -204,8 +208,9 @@ export default function useMediaCarousel(props) {
                                 height,
                             }}
                         >
-                            <SlideAnimation distance={width + 60}>
+                            <SlideAnimation distance={width + slideGap}>
                                 <Slide
+
                                     theme={theme}
                                     width={width}
                                     height={height}
@@ -223,7 +228,7 @@ export default function useMediaCarousel(props) {
                         <div
                             style={{
                                 position: 'absolute',
-                                left: slidingRight ? (width + 60) * -1 : width + 60,
+                                left: slidingRight ? (width + slideGap) * -1 : width + slideGap,
                                 top: 0,
                                 background: 'transparent',
                                 borderRadius: 15,
@@ -232,7 +237,7 @@ export default function useMediaCarousel(props) {
                             }}
                         >
                             <SlideAnimation
-                                distance={width + 60}
+                                distance={width + slideGap}
                                 onAnimationEnd={() => {
                                     if (slidingRight) {
                                         setSlidingRight(false);
@@ -258,7 +263,7 @@ export default function useMediaCarousel(props) {
                         <div
                             style={{
                                 position: 'absolute',
-                                left: (width + 60) * -1,
+                                left: (width + slideGap) * -1,
                                 top: 0,
                                 background: 'white',
                                 borderRadius: 15,
@@ -352,7 +357,7 @@ export default function useMediaCarousel(props) {
                     {/* The Active Slide Animation */}
 
                     {slidingLeft || slidingRight ? (
-                        <SlideAnimation distance={(width + 60) * (slidingLeft ? -1 : 1)}>
+                        <SlideAnimation distance={(width + slideGap) * (slidingLeft ? -1 : 1)}>
                             <div
                                 style={{
                                     background: 'black',
@@ -381,6 +386,7 @@ export default function useMediaCarousel(props) {
                         <div style={{ width, height }} />
                     ) : (
                         <Slide
+                            editing={editing}
                             theme={theme}
                             width={width}
                             height={height}
@@ -389,10 +395,33 @@ export default function useMediaCarousel(props) {
                             src={slides[activeSlide].src}
                             mediaType={slides[activeSlide].mediaType}
                             onVideoEnd={() => {
+                                if (activeSlide === slides.length - 1) {
+                                    return;
+                                }
                                 setSlidingLeft(true);
                             }}
                             onAudioEnd={() => {
+                                if (activeSlide === slides.length - 1) {
+                                    return;
+                                }
                                 setSlidingLeft(true);
+                            }}
+                            onSwipeLeft={() => {
+                                pauseActiveMedia();
+                                if (activeSlide === slides.length - 1) {
+                                    return;
+                                }
+
+                                setSlidingLeft(true);
+
+                            }}
+                            onSwipeRight={() => {
+                                pauseActiveMedia();
+                                if (activeSlide === 0) {
+                                    return;
+                                }
+
+                                setSlidingRight(true);
                             }}
                             setActivePlayer={(component) => {
                                 activeVideoPlayer.current = component;
@@ -401,6 +430,7 @@ export default function useMediaCarousel(props) {
                                 activeAudioPlayer.current = component;
                             }}
                             audioSrc={slides[activeSlide].audioSrc}
+
                         />
                     )}
 
@@ -409,7 +439,7 @@ export default function useMediaCarousel(props) {
                         <div
                             style={{
                                 position: 'absolute',
-                                left: width + 60,
+                                left: width + slideGap,
                                 top: 0,
                                 background: 'white',
                                 borderRadius: 15,
@@ -505,7 +535,7 @@ export default function useMediaCarousel(props) {
                         <div
                             style={{
                                 position: 'absolute',
-                                left: width + 60,
+                                left: width + slideGap,
                                 top: 0,
                                 background: 'transparent',
                                 borderRadius: 15,
@@ -514,7 +544,7 @@ export default function useMediaCarousel(props) {
                             }}
                         >
                             <SlideAnimation
-                                distance={slidingLeft ? (width + 60) * -1 : width + 60}
+                                distance={slidingLeft ? (width + slideGap) * -1 : width + slideGap}
                                 onAnimationEnd={() => {
                                     if (slidingLeft) {
                                         setSlidingLeft(false);
@@ -540,7 +570,7 @@ export default function useMediaCarousel(props) {
                         <div
                             style={{
                                 position: 'absolute',
-                                left: (width + 60) * 2,
+                                left: (width + slideGap) * 2,
                                 top: 0,
                                 background: 'transparent',
                                 borderRadius: 15,
@@ -549,7 +579,7 @@ export default function useMediaCarousel(props) {
                             }}
                         >
                             <SlideAnimation
-                                distance={slidingLeft ? (width + 60) * -1 : width + 60}
+                                distance={slidingLeft ? (width + slideGap) * -1 : width + slideGap}
                             >
                                 <Slide
                                     theme={theme}
@@ -568,8 +598,10 @@ export default function useMediaCarousel(props) {
                             position: 'absolute',
                             top: height + 10,
                             width: '100%',
+                            height: '100%',
                             display: 'flex',
                             justifyContent: 'center',
+                            background: Util.isMobile() ? "black" : "transparent"
                         }}
                     >
                         <div>
@@ -588,10 +620,16 @@ export default function useMediaCarousel(props) {
                                         }}
                                         onPrev={() => {
                                             pauseActiveMedia();
+                                            if (activeSlide === 0) {
+                                                return;
+                                            }
                                             setSlidingRight(true);
                                         }}
                                         onNext={() => {
                                             pauseActiveMedia();
+                                            if (activeSlide === slides.length - 1) {
+                                                return;
+                                            }
                                             setSlidingLeft(true);
                                         }}
                                     />
@@ -615,6 +653,7 @@ export default function useMediaCarousel(props) {
             )}
         </Backdrop>,
         () => {
+            setActiveSlide(0);
             setOpen(true);
         },
     ];
