@@ -65,7 +65,7 @@ export default function Slide(props) {
                             >
                                 {props.audioSrc ? (
                                     <audio
-                                        style={{ position: Util.isMobile() ? "auto" : "absolute", bottom: 5, width: Util.isMobile() ? width : "100%" }}
+                                        style={{ position: "absolute", bottom: 5, width: Util.isMobile() ? width : "100%" }}
                                         controls
                                         src={props.audioSrc}
                                         onEnded={() => {

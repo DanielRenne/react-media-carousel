@@ -19,7 +19,7 @@ export default function SlideAnimation(props) {
     //cubic-bezier(0.42, 0, 0.58, 1):  Allows you to define your own timing function using cubic Bezier curves
 
     const animationStyle = {
-        animation: `dynamicMoveAnimation 650ms ease-in-out forwards`,
+        animation: `dynamicMoveAnimation 500ms ease-in-out forwards`,
     };
 
     return (
