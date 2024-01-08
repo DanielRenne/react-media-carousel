@@ -224,7 +224,8 @@ export default function Slide(props) {
                                     marginBottom: 30,
                                     height: (height / 2) - 75,
                                     overflowY: "auto",
-                                    color: props.theme === "dark" ? "white" : "black"
+                                    color: props.theme === "dark" ? "white" : "black",
+                                    wordBreak: "break-word"
                                 }}>
                                     {props.story}
                                 </div>
@@ -268,6 +269,7 @@ export default function Slide(props) {
                                         fontSize: 18,
                                         overflow: "auto",
                                         height: "100%",
+                                        wordBreak: "break-word"
                                     }}
                                 >
                                     {props.story}
