@@ -227,7 +227,12 @@ export default function Slide(props) {
                                     color: props.theme === "dark" ? "white" : "black",
                                     wordBreak: "break-word"
                                 }}>
-                                    {props.story}
+                                    {props.story.split('\n').map((line, index) => (
+                                        <React.Fragment key={index}>
+                                            {line}
+                                            {index !== props.story.split('\n').length - 1 && <br />}
+                                        </React.Fragment>
+                                    ))}
                                 </div>
                             </div>
 
@@ -272,7 +277,12 @@ export default function Slide(props) {
                                         wordBreak: "break-word"
                                     }}
                                 >
-                                    {props.story}
+                                    {props.story.split('\n').map((line, index) => (
+                                        <React.Fragment key={index}>
+                                            {line}
+                                            {index !== props.story.split('\n').length - 1 && <br />}
+                                        </React.Fragment>
+                                    ))}
                                 </div>
                             </div>
                         </div>
