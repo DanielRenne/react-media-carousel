@@ -165,11 +165,14 @@ export default function useMediaCarousel(props) {
     }, [activeSlide, slideShow, open, slides, paused]);
 
     useEffect(() => {
-        document.addEventListener('keydown', onKeyDown);
+        if (open) {
+            document.addEventListener('keydown', onKeyDown);
+        }
+
         return () => {
             document.removeEventListener('keydown', onKeyDown);
         };
-    }, [onKeyDown]);
+    }, [onKeyDown, open]);
 
     const close = React.useCallback(() => {
         setOpen(false);
