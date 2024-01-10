@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Util from "./util";
+import Button from "@mui/material/Button";
 
 
 export default function Slide(props) {
     const width = props.width ? props.width : 800;
     const height = props.height ? props.height : Util.isMobile() ? window.innerHeight - 150 : 600;
     const theme = props.theme;
+    const [hover, setHover] = useState();
     const touchStartX = useRef(0);
     const touchEndX = useRef(0);
     const hasAudio = props.audioSrc && props.audioSrc !== "";
@@ -131,6 +133,59 @@ export default function Slide(props) {
 
     )
 
+    const nextButton = (
+        props.showNextButton ? props.nextButton ?
+            <div
+                style={{ height: 45 }}
+                onClick={() => {
+                    if (props.onSwipeLeft) {
+                        props.onSwipeLeft();
+                    }
+                }}
+            >
+                {props.nextButton}
+            </div> :
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}> <Button style={{
+                backgroundColor: hover ? props.theme === "dark" ? "white" : "black" : "transparent",
+                borderRadius: 6,
+                height: 45,
+                width: "80%",
+                textShadow: "0 0 black",
+                fontWeight: "bold",
+                border: props.theme === "dark" ? "white" : "black",
+                borderStyle: "solid",
+                borderWidth: 1,
+                whiteSpace: "nowrap",
+                textTransform: "none",
+            }}
+                variant="contained"
+                title="Next"
+
+                onMouseEnter={() => {
+                    setHover(true);
+                }}
+                onMouseLeave={() => {
+                    setHover(false);
+                }}
+                onClick={() => {
+                    if (props.onSwipeLeft) {
+                        props.onSwipeLeft();
+                    }
+                }}
+            >
+                <div
+
+                    style={{ display: "flex", alignItems: "center", justifyContent: "center", color: hover ? props.theme === "dark" ? "black" : "white" : props.theme === "dark" ? "white" : "black", width: "100%" }}
+                >
+
+                    <div style={{ marginTop: 5, marginLeft: 10, fontSize: 14 }}>
+                        {props.nextButtonText ? props.nextButtonText : "Next"}
+                    </div>
+                </div>
+            </Button></div> : null
+    )
+
+
     return (
         <div
             style={{
@@ -222,7 +277,7 @@ export default function Slide(props) {
                                     marginRight: 20,
                                     marginTop: 10,
                                     marginBottom: 30,
-                                    height: (height / 2) - 75,
+                                    height: (height / 2) - 75 - (props.showNextButton ? 60 : 0),
                                     overflowY: "auto",
                                     color: props.theme === "dark" ? "white" : "black",
                                     wordBreak: "break-word"
@@ -234,6 +289,7 @@ export default function Slide(props) {
                                         </React.Fragment>
                                     ))}
                                 </div>
+                                {nextButton}
                             </div>
 
                         </div>
@@ -267,26 +323,33 @@ export default function Slide(props) {
                                     <h2>{props.title}</h2>
                                 </div>
                             </div>
-                            <div style={{ height: "75%", color: theme === "dark" ? "white" : "black" }}>
-                                <div
-                                    style={{
-                                        width: "100%",
-                                        fontSize: 18,
-                                        overflow: "auto",
-                                        height: "100%",
-                                        wordBreak: "break-word"
-                                    }}
-                                >
-                                    {props.story.split('\n').map((line, index) => (
-                                        <React.Fragment key={index}>
-                                            {line}
-                                            {index !== props.story.split('\n').length - 1 && <br />}
-                                        </React.Fragment>
-                                    ))}
+                            <div>
+                                <div style={{ height: props.showNextButton ? "70%" : "75%", color: theme === "dark" ? "white" : "black" }}>
+                                    <div
+                                        style={{
+                                            width: "100%",
+                                            fontSize: 18,
+                                            overflow: "auto",
+                                            maxHeight: height - (props.showNextButton ? 200 : 150),
+                                            minHeight: height - (props.showNextButton ? 200 : 150),
+                                            wordBreak: "break-word",
+                                            marginBottom: 20
+                                        }}
+                                    >
+                                        {props.story.split('\n').map((line, index) => (
+                                            <React.Fragment key={index}>
+                                                {line}
+                                                {index !== props.story.split('\n').length - 1 && <br />}
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
                                 </div>
+                                {nextButton}
                             </div>
+
                         </div>
                         <div style={{ width: "2%" }} />
+
                     </React.Fragment>
             }
 
