@@ -24,6 +24,7 @@ export default function useMediaCarousel(props) {
     const editing = props.editing ? props.editing : false;
     const showNextButton = props.showNextButton ? props.showNextButton : false;
     const nextButtonText = props.nextButtonText ? props.nextButtonText : undefined;
+    const nextButton = props.nextButton ? props.nextButton : undefined;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
@@ -256,6 +257,7 @@ export default function useMediaCarousel(props) {
                                     height={height}
                                     showNextButton={showNextButton}
                                     nextButtonText={nextButtonText}
+                                    nextButton={nextButton}
                                     story={slides[activeSlide - 1].story}
                                     title={slides[activeSlide - 1].title}
                                     src={slides[activeSlide - 1].src}
@@ -397,6 +399,7 @@ export default function useMediaCarousel(props) {
                             theme={theme}
                             width={width}
                             height={height}
+                            nextButton={nextButton}
                             showNextButton={activeSlide === slides.length - 1 ? false : showNextButton}
                             nextButtonText={nextButtonText}
                             story={slides[activeSlide].story}
@@ -565,6 +568,7 @@ export default function useMediaCarousel(props) {
                                     theme={theme}
                                     width={width}
                                     height={height}
+                                    nextButton={nextButton}
                                     showNextButton={(activeSlide + 1) === slides.length - 1 ? false : showNextButton}
                                     nextButtonText={nextButtonText}
                                     story={slides[activeSlide + 1].story}
