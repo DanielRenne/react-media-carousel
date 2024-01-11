@@ -180,6 +180,18 @@ const Util = {
         }
         return false;
     },
+    convertObjectKeysToLowerCase(obj) {
+        const convertedObject = {};
+
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                const lowerCaseKey = key.toLowerCase();
+                convertedObject[lowerCaseKey] = obj[key];
+            }
+        }
+
+        return convertedObject;
+    }
 };
 
 export default Util;

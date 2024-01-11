@@ -30,7 +30,16 @@ export default function useMediaCarousel(props) {
     const activeAudioPlayer = useRef();
     const activeSlideshowTimer = useRef();
 
-    const slides = props.slides ? props.slides : [];
+
+
+    var adjustedSlides = [];
+    if (props.slides && props.slides.length > 0) {
+        for (var i = 0; i < props.slides.length; i++) {
+            adjustedSlides.push(Util.convertObjectKeysToLowerCase(props.slides[i]));
+        }
+    }
+
+    const slides = props.slides ? adjustedSlides : [];
     const slideGap = Util.isMobile() ? 10 : 60;
     const width = Util.isMobile() ? window.innerWidth - 40 : 5 * (window.innerWidth / 9);
     const height = Util.isMobile() ? window.innerHeight - 200 : 5 * (window.innerHeight / 8);
