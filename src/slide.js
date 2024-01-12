@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Util from "./util";
 import Button from "@mui/material/Button";
+import Close from "@mui/icons-material/Close";
 
 
 export default function Slide(props) {
@@ -125,7 +126,9 @@ export default function Slide(props) {
             <img
                 style={{
                     width: "100%",
+                    maxHeight: Util.isMobile() ? hasAudio ? (props.height / 2) - 100 : (props.height / 2) - 10 : props.height - 120,
                     display: "block",
+                    objectFit: "cover",
                 }}
                 src={props.src}
             />
@@ -195,6 +198,7 @@ export default function Slide(props) {
                 height: height,
                 display: "flex",
                 justifyContent: "left",
+                position: "relative"
             }}
             onClick={(ev) => {
                 ev.preventDefault();
@@ -232,6 +236,14 @@ export default function Slide(props) {
                 }
             }}
         >
+            <Close
+                style={{ cursor: "pointer", color: theme === "dark" ? "white" : "black", position: "absolute", top: 10, right: 10 }}
+                onClick={() => {
+                    if (props.onClose) {
+                        props.onClose();
+                    }
+                }}
+            />
             {
                 Util.isMobile() ?
 
@@ -257,9 +269,10 @@ export default function Slide(props) {
                             </div>
                             <div
                                 style={{
-                                    height: Util.isMobile() && hasAudio ? "70%" : "auto",
+                                    height: Util.isMobile() && hasAudio ? "70%" : "auto"
                                 }}
                             >
+
                                 <div style={{
                                     width: "100%",
                                     height: "20%",

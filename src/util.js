@@ -185,7 +185,7 @@ const Util = {
 
         for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
-                const lowerCaseKey = key.toLowerCase();
+                const lowerCaseKey = key.charAt(0).toLowerCase() + key.slice(1);
                 convertedObject[lowerCaseKey] = obj[key];
             }
         }

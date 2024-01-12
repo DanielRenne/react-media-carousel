@@ -451,6 +451,9 @@ export default function useMediaCarousel(props) {
                                 activeAudioPlayer.current = component;
                             }}
                             audioSrc={slides[activeSlide].audioSrc}
+                            onClose={() => {
+                                close();
+                            }}
 
                         />
                     )}
