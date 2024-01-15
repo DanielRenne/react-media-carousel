@@ -348,7 +348,7 @@ export default function Slide(props) {
                                     <h2>{props.title}</h2>
                                 </div>
                             </div>
-                            <div>
+                            <div style={{ height: "100%" }}>
                                 <div style={{ height: props.showNextButton ? "70%" : "75%", color: theme === "dark" ? "white" : "black" }}>
                                     <div
                                         style={{
