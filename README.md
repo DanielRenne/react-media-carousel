@@ -46,3 +46,8 @@ Slide fields
     src: string (url of the photo or video),
     mediaType: string ("photo" or "video"),
     audioSrc: string (url of the audio for the slide.  Optional)
+
+Supported story special characters
+
+    \n : Will generate a new line with <br/>,
+    &bull; : Will generate a bullet point with &bull; injected into the DOM. 

@@ -13,6 +13,20 @@ export default function Slide(props) {
     const touchEndX = useRef(0);
     const hasAudio = props.audioSrc && props.audioSrc !== "";
 
+    const processBulletPoints = (text) => {
+
+        const bulletPoints = text.split('&bull;').map((point, index, array) => (
+            <React.Fragment key={index}>
+                {point.trim()} {/* Trim to remove extra whitespaces */}
+                {index < array.length - 1 && <span>&bull; </span>}
+            </React.Fragment>
+        ));
+
+        return bulletPoints;
+
+    }
+
+
     const title = (
         <div style={{ height: "20%", color: theme === "dark" ? "white" : "black" }} className="aligner">
             <div style={{ width: "100%" }}>
@@ -284,8 +298,6 @@ export default function Slide(props) {
                                     {title}
                                 </div>
                                 <div style={{
-                                    display: "flex",
-                                    justifyContent: "left",
                                     marginLeft: 20,
                                     marginRight: 20,
                                     marginTop: 10,
@@ -297,7 +309,7 @@ export default function Slide(props) {
                                 }}>
                                     {props.story.split('\n').map((line, index) => (
                                         <React.Fragment key={index}>
-                                            {line}
+                                            {processBulletPoints(line)}
                                             {index !== props.story.split('\n').length - 1 && <br />}
                                         </React.Fragment>
                                     ))}
@@ -351,7 +363,7 @@ export default function Slide(props) {
                                     >
                                         {props.story.split('\n').map((line, index) => (
                                             <React.Fragment key={index}>
-                                                {line}
+                                                {processBulletPoints(line)}
                                                 {index !== props.story.split('\n').length - 1 && <br />}
                                             </React.Fragment>
                                         ))}
