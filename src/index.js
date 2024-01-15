@@ -25,6 +25,7 @@ export default function useMediaCarousel(props) {
     const showNextButton = props.showNextButton ? props.showNextButton : false;
     const nextButtonText = props.nextButtonText ? props.nextButtonText : undefined;
     const nextButton = props.nextButton ? props.nextButton : undefined;
+    const swipeThreshold = props.swipeThreshold ? props.swipeThreshold : undefined;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
@@ -411,6 +412,7 @@ export default function useMediaCarousel(props) {
                             nextButton={nextButton}
                             showNextButton={activeSlide === slides.length - 1 ? false : showNextButton}
                             nextButtonText={nextButtonText}
+                            swipeThreshold={swipeThreshold}
                             story={slides[activeSlide].story}
                             title={slides[activeSlide].title}
                             src={slides[activeSlide].src}

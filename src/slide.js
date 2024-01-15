@@ -9,6 +9,7 @@ export default function Slide(props) {
     const width = props.width ? props.width : 800;
     const height = props.height ? props.height : Util.isMobile() ? window.innerHeight - 150 : 600;
     const theme = props.theme;
+    const swipeThreshld = props.swipeThreshold;
     const [hover, setHover] = useState();
     const touchStartX = useRef(0);
     const touchEndX = useRef(0);
@@ -233,7 +234,7 @@ export default function Slide(props) {
                 touchEndX.current = e.touches[0].clientX;
             }}
             onTouchEnd={(e) => {
-                const swipeThreshold = 50; // You can adjust this value based on your preference
+                const swipeThreshold = swipeThreshld ? swipeThreshld : 50; // You can adjust this value based on your preference
 
                 const deltaX = touchEndX.current - touchStartX.current;
 

@@ -38,6 +38,7 @@ Props
     showNextButton: boolean (true will show a Next Button below the story.)
     nextButton: object (This is a way to override the next button.  Create a div of 45px to your own style.  No need to implement on click for next slide.  Just style the button.)
     nextButtonText: string (This is a way to override the text of the Next button.  Maybe for a translation.)
+    swipeThreshold: number (override the default 50 px threshold for sliding to the next or previous slide.)
 
 Slide fields
 
