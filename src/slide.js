@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import Util from "./util";
 import Button from "@mui/material/Button";
 import Close from "@mui/icons-material/Close";
+import ZoomableImage from "./zoomableImage";
 
 
 export default function Slide(props) {
@@ -63,12 +64,13 @@ export default function Slide(props) {
                                 alignItems: "center"
                             }}
                             >
-                                <img
+                                <ZoomableImage
                                     style={{
                                         width: "100%",
                                         maxHeight: Util.isMobile() ? hasAudio ? (props.height / 2) - 100 : (props.height / 2) - 10 : props.height - 120,
                                         display: "block",
                                         objectFit: "cover",
+
                                     }}
                                     src={props.src}
                                 />
@@ -137,7 +139,7 @@ export default function Slide(props) {
                 </video>
             )
         ) : (
-            <img
+            <ZoomableImage
                 style={{
                     width: "100%",
                     maxHeight: Util.isMobile() ? hasAudio ? (props.height / 2) - 100 : (props.height / 2) - 10 : props.height - 120,
