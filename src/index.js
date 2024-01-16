@@ -26,6 +26,9 @@ export default function useMediaCarousel(props) {
     const nextButtonText = props.nextButtonText ? props.nextButtonText : undefined;
     const nextButton = props.nextButton ? props.nextButton : undefined;
     const swipeThreshold = props.swipeThreshold ? props.swipeThreshold : undefined;
+    const fontFamily = props.fontFamily ? props.fontFamily : undefined;
+    const fontSize = props.fontSize ? props.fontSize : undefined;
+    const fontWeight = props.fontWeight ? props.fontWeight : undefined;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
@@ -234,6 +237,9 @@ export default function useMediaCarousel(props) {
                                     title={slides[activeSlide - 2].title}
                                     src={slides[activeSlide - 2].src}
                                     mediaType={slides[activeSlide - 2].mediaType}
+                                    fontFamily={fontFamily}
+                                    fontSize={fontSize}
+                                    fontWeight={fontWeight}
                                 />
                             </SlideAnimation>
                         </div>
@@ -272,6 +278,9 @@ export default function useMediaCarousel(props) {
                                     title={slides[activeSlide - 1].title}
                                     src={slides[activeSlide - 1].src}
                                     mediaType={slides[activeSlide - 1].mediaType}
+                                    fontFamily={fontFamily}
+                                    fontSize={fontSize}
+                                    fontWeight={fontWeight}
                                 />
                             </SlideAnimation>
                         </div>
@@ -317,6 +326,9 @@ export default function useMediaCarousel(props) {
                                     title={slides[activeSlide - 1].title}
                                     src={slides[activeSlide - 1].src}
                                     mediaType={slides[activeSlide - 1].mediaType}
+                                    fontFamily={fontFamily}
+                                    fontSize={fontSize}
+                                    fontWeight={fontWeight}
                                 />
                             </div>
                             <div
@@ -395,6 +407,9 @@ export default function useMediaCarousel(props) {
                                     title={slides[activeSlide].title}
                                     src={slides[activeSlide].src}
                                     mediaType={slides[activeSlide].mediaType}
+                                    fontFamily={fontFamily}
+                                    fontSize={fontSize}
+                                    fontWeight={fontWeight}
                                 />
                             </div>
                         </SlideAnimation>
@@ -410,6 +425,9 @@ export default function useMediaCarousel(props) {
                             width={width}
                             height={height}
                             nextButton={nextButton}
+                            fontFamily={fontFamily}
+                            fontSize={fontSize}
+                            fontWeight={fontWeight}
                             showNextButton={activeSlide === slides.length - 1 ? false : showNextButton}
                             nextButtonText={nextButtonText}
                             swipeThreshold={swipeThreshold}
@@ -500,6 +518,9 @@ export default function useMediaCarousel(props) {
                                     title={slides[activeSlide + 1].title}
                                     src={slides[activeSlide + 1].src}
                                     mediaType={slides[activeSlide + 1].mediaType}
+                                    fontFamily={fontFamily}
+                                    fontSize={fontSize}
+                                    fontWeight={fontWeight}
                                 />
                             </div>
                             <div
@@ -589,6 +610,9 @@ export default function useMediaCarousel(props) {
                                     title={slides[activeSlide + 1].title}
                                     src={slides[activeSlide + 1].src}
                                     mediaType={slides[activeSlide + 1].mediaType}
+                                    fontFamily={fontFamily}
+                                    fontSize={fontSize}
+                                    fontWeight={fontWeight}
                                 />
                             </SlideAnimation>
                         </div>
@@ -618,6 +642,9 @@ export default function useMediaCarousel(props) {
                                     title={slides[activeSlide + 2].title}
                                     src={slides[activeSlide + 2].src}
                                     mediaType={slides[activeSlide + 2].mediaType}
+                                    fontFamily={fontFamily}
+                                    fontSize={fontSize}
+                                    fontWeight={fontWeight}
                                 />
                             </SlideAnimation>
                         </div>

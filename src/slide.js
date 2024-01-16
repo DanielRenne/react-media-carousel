@@ -5,10 +5,14 @@ import Close from "@mui/icons-material/Close";
 import ZoomableImage from "./zoomableImage";
 
 
+
 export default function Slide(props) {
     const width = props.width ? props.width : 800;
     const height = props.height ? props.height : Util.isMobile() ? window.innerHeight - 150 : 600;
     const theme = props.theme;
+    const fontFamily = props.fontFamily ? props.fontFamily : "";
+    const fontSize = props.fontSize ? props.fontSize : 16;
+    const fontWeight = props.fontWeight ? props.fontWeight : "";
     const swipeThreshld = props.swipeThreshold;
     const [hover, setHover] = useState();
     const touchStartX = useRef(0);
@@ -308,7 +312,10 @@ export default function Slide(props) {
                                     height: (height / 2) - 75 - (props.showNextButton ? 60 : 0),
                                     overflowY: "auto",
                                     color: props.theme === "dark" ? "white" : "black",
-                                    wordBreak: "break-word"
+                                    wordBreak: "break-word",
+                                    fontSize: fontSize,
+                                    fontWeight: fontWeight,
+                                    fontFamily: fontFamily
                                 }}>
                                     {props.story.split('\n').map((line, index) => (
                                         <React.Fragment key={index}>
@@ -356,7 +363,9 @@ export default function Slide(props) {
                                     <div
                                         style={{
                                             width: "100%",
-                                            fontSize: 18,
+                                            fontSize: fontSize,
+                                            fontWeight: fontWeight,
+                                            fontFamily: fontFamily,
                                             overflow: "auto",
                                             maxHeight: height - (props.showNextButton ? 200 : 150),
                                             minHeight: height - (props.showNextButton ? 200 : 150),

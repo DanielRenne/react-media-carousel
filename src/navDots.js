@@ -11,14 +11,14 @@ export default function NavDots(props) {
 .dot {
     height: 12px;
     width: 12px;
-    background-color: #bbb;
+    background-color: #333;
     border-radius: 50%;
     margin: 0 8px;
     cursor: pointer;
 }
 
 .active {
-    background-color: #333;
+    background-color: #bbb;
 }`;
 
     return (

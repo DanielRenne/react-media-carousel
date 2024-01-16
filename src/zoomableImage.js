@@ -12,7 +12,7 @@ export default function ZoomableImage(props) {
     style.transform = `scale(${scale})`;
     style.transition = "transform 0.3s ease-out";
     style.position = "relative";
-    style.zIndex = 2;
+    style.zIndex = scale === 1 ? 0 : 2;
 
     return (
         <img

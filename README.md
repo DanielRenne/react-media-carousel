@@ -39,6 +39,10 @@ Props
     nextButton: object (This is a way to override the next button.  Create a div of 45px to your own style.  No need to implement on click for next slide.  Just style the button.)
     nextButtonText: string (This is a way to override the text of the Next button.  Maybe for a translation.)
     swipeThreshold: number (override the default 50 px threshold for sliding to the next or previous slide.)
+    fontSize: number (override the story font size of 16.)
+    fontWeight: string (override the css font weight of the story.)
+    fontFamily: string (override the css font family of the story.)
+
 
 Slide fields
 
