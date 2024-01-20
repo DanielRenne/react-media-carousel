@@ -2,7 +2,7 @@ React Media Carousel
 
 A media carousel that supports video, photo & audio combination, a title, and story.  Keyboard left, right, arrows and spacebar for pause/playback.  Auto slide show when video and audio playback completes.  CSS animation for transitions.
 
-Currently this depends on React 17 and up and Material UI 5.15.
+Currently this depends on React 18 and up and Material UI 5.15.
 
 Usage Example:
 

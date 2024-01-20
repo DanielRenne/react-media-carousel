@@ -18,6 +18,7 @@ export default function Slide(props) {
     const touchStartX = useRef(0);
     const touchEndX = useRef(0);
     const hasAudio = props.audioSrc && props.audioSrc !== "";
+    const hasContent = (props.title && props.title !== "") || (props.story && props.story !== "");
 
     const processBulletPoints = (text) => {
 
@@ -258,7 +259,14 @@ export default function Slide(props) {
             }}
         >
             <Close
-                style={{ cursor: "pointer", color: theme === "dark" ? "white" : "black", position: "absolute", top: 10, right: 10 }}
+                style={{
+                    cursor: "pointer",
+                    color: theme === "dark" ? "white" : "black",
+                    position: "absolute",
+                    top: 10,
+                    right: 10,
+                    zIndex: 2
+                }}
                 onClick={() => {
                     if (props.onClose) {
                         props.onClose();
@@ -274,7 +282,7 @@ export default function Slide(props) {
                             <div
                                 style={{
                                     width: "100%",
-                                    height: "50%",
+                                    height: hasContent ? "50%" : "100%",
                                     background: theme === "dark" ? "#303030" : "#f8f8f8",
                                     borderTopLeftRadius: 15,
                                     borderTopRightRadius: 15,
@@ -331,7 +339,7 @@ export default function Slide(props) {
                     </React.Fragment> : <React.Fragment>
                         <div
                             style={{
-                                width: "60%",
+                                width: hasContent ? "60%" : "100%",
                                 background: theme === "dark" ? "#303030" : "#f8f8f8",
                                 borderTopLeftRadius: 15,
                                 borderBottomLeftRadius: 15,
@@ -343,10 +351,10 @@ export default function Slide(props) {
                         >
                             {media}
                         </div>
-                        <div style={{ width: "3%" }} />
+                        <div style={{ width: hasContent ? "3%" : "0%" }} />
                         <div
                             style={{
-                                width: "35%",
+                                width: hasContent ? "35%" : "0%",
                                 background: "transparent",
                                 borderTopRightRadius: 15,
                                 borderBottomRightRadius: 15,
@@ -385,7 +393,7 @@ export default function Slide(props) {
                             </div>
 
                         </div>
-                        <div style={{ width: "2%" }} />
+                        <div style={{ width: hasContent ? "2%" : "0%" }} />
 
                     </React.Fragment>
             }
