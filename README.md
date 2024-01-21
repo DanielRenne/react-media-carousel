@@ -42,6 +42,7 @@ Props
     fontSize: number (override the story font size of 16.)
     fontWeight: string (override the css font weight of the story.)
     fontFamily: string (override the css font family of the story.)
+    opacity: number (override the default css opacity for the Backdrop. Range [0 to 1])
 
 
 Slide fields

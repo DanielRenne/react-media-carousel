@@ -18,6 +18,7 @@ export default function useMediaCarousel(props) {
     const [paused, setPaused] = useState();
 
 
+
     const theme = props.theme ? props.theme : "light";
     const slideDuration = props.slideDuration ? props.slideDuration : 5000;
     const slideShow = props.slideShow ? props.slideShow : false;
@@ -29,6 +30,7 @@ export default function useMediaCarousel(props) {
     const fontFamily = props.fontFamily ? props.fontFamily : undefined;
     const fontSize = props.fontSize ? props.fontSize : undefined;
     const fontWeight = props.fontWeight ? props.fontWeight : undefined;
+    const opacity = props.opacity ? props.opacity : undefined;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
@@ -204,7 +206,7 @@ export default function useMediaCarousel(props) {
     return [
         // eslint-disable-next-line react/jsx-key
         <Backdrop
-            sx={{ color: '#fff', zIndex: 9999 }}
+            sx={{ color: '#fff', zIndex: 9999, backgroundColor: opacity ? "rgba(0, 0, 0, " + opacity + ")" : "" }}
             open={open}
             onClick={() => {
                 close();

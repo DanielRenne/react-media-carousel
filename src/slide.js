@@ -210,7 +210,6 @@ export default function Slide(props) {
             </Button></div> : null
     )
 
-
     return (
         <div
             style={{
