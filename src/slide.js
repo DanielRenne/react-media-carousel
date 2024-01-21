@@ -19,6 +19,7 @@ export default function Slide(props) {
     const touchEndX = useRef(0);
     const hasAudio = props.audioSrc && props.audioSrc !== "";
     const hasContent = (props.title && props.title !== "") || (props.story && props.story !== "");
+    const story = props.story ? props.story : "";
 
     const processBulletPoints = (text) => {
 
@@ -285,6 +286,8 @@ export default function Slide(props) {
                                     background: theme === "dark" ? "#303030" : "#f8f8f8",
                                     borderTopLeftRadius: 15,
                                     borderTopRightRadius: 15,
+                                    borderBottomLeftRadius: hasContent ? 0 : 15,
+                                    borderBottomRightRadius: hasContent ? 0 : 15,
                                     position: "relative",
                                     display: "flex",
                                     justifyContent: "center",
@@ -296,9 +299,9 @@ export default function Slide(props) {
                                 </div>
                             </div>
                             <div
-                                style={{
-                                    height: Util.isMobile() && hasAudio ? "70%" : "auto"
-                                }}
+                            // style={{
+                            //     height: Util.isMobile() && hasAudio ? "70%" : "100%"
+                            // }}
                             >
 
                                 <div style={{
@@ -316,7 +319,7 @@ export default function Slide(props) {
                                     marginRight: 20,
                                     marginTop: 10,
                                     marginBottom: 30,
-                                    height: (height / 2) - 75 - (props.showNextButton ? 60 : 0),
+                                    height: (Util.isMobile() ? (height / 2.8) : (height / 2) - 75) - (props.showNextButton ? 60 : 0),
                                     overflowY: "auto",
                                     color: props.theme === "dark" ? "white" : "black",
                                     wordBreak: "break-word",
@@ -324,10 +327,10 @@ export default function Slide(props) {
                                     fontWeight: fontWeight,
                                     fontFamily: fontFamily
                                 }}>
-                                    {props.story.split('\n').map((line, index) => (
+                                    {story.split('\n').map((line, index) => (
                                         <React.Fragment key={index}>
                                             {processBulletPoints(line)}
-                                            {index !== props.story.split('\n').length - 1 && <br />}
+                                            {index !== story.split('\n').length - 1 && <br />}
                                         </React.Fragment>
                                     ))}
                                 </div>
@@ -342,6 +345,8 @@ export default function Slide(props) {
                                 background: theme === "dark" ? "#303030" : "#f8f8f8",
                                 borderTopLeftRadius: 15,
                                 borderBottomLeftRadius: 15,
+                                borderBottomRightRadius: hasContent ? 0 : 15,
+                                borderTopRightRadius: hasContent ? 0 : 15,
                                 position: "relative",
                                 display: "flex",
                                 justifyContent: "center",
@@ -380,10 +385,10 @@ export default function Slide(props) {
                                             marginBottom: 20
                                         }}
                                     >
-                                        {props.story.split('\n').map((line, index) => (
+                                        {story.split('\n').map((line, index) => (
                                             <React.Fragment key={index}>
                                                 {processBulletPoints(line)}
-                                                {index !== props.story.split('\n').length - 1 && <br />}
+                                                {index !== story.split('\n').length - 1 && <br />}
                                             </React.Fragment>
                                         ))}
                                     </div>

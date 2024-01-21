@@ -43,6 +43,9 @@ Props
     fontWeight: string (override the css font weight of the story.)
     fontFamily: string (override the css font family of the story.)
     opacity: number (override the default css opacity for the Backdrop. Range [0 to 1])
+    desktopSlideWidth: number (override the default width of a desktop slide.)
+    desktopSlideHeight: number (override the default height of a desktop slide.)
+    title: object (React object to add a title to the carousel just above the main slide.)
 
 
 Slide fields

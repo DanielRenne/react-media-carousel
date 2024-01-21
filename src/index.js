@@ -31,6 +31,9 @@ export default function useMediaCarousel(props) {
     const fontSize = props.fontSize ? props.fontSize : undefined;
     const fontWeight = props.fontWeight ? props.fontWeight : undefined;
     const opacity = props.opacity ? props.opacity : undefined;
+    const desktopSlideWidth = props.desktopSlideWidth ? props.desktopSlideWidth : undefined;
+    const desktopSlideHeight = props.desktopSlideHeight ? props.desktopSlideHeight : undefined;
+    const title = props.title ? props.title : null;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
@@ -47,8 +50,8 @@ export default function useMediaCarousel(props) {
 
     const slides = props.slides ? adjustedSlides : [];
     const slideGap = Util.isMobile() ? 10 : 60;
-    const width = Util.isMobile() ? window.innerWidth - 40 : 5 * (window.innerWidth / 9);
-    const height = Util.isMobile() ? window.innerHeight - 200 : 5 * (window.innerHeight / 8);
+    const width = Util.isMobile() ? window.innerWidth - 40 : desktopSlideWidth ? desktopSlideWidth : 5 * (window.innerWidth / 9);
+    const height = Util.isMobile() ? window.innerHeight - 200 : desktopSlideHeight ? desktopSlideHeight : 5 * (window.innerHeight / 8);
 
     const togglePlayPause = React.useCallback(() => {
         if (paused) {
@@ -355,7 +358,7 @@ export default function useMediaCarousel(props) {
                                     position: 'absolute',
                                     display: showLeftArrow ? 'flex' : 'none',
                                     top: height / 2,
-                                    left: width - width / 10,
+                                    left: width - 120,
                                     background: 'hsla(0,0%,100%,.25)',
                                     opacity: 20,
                                     border: '1px solid black',
@@ -547,7 +550,7 @@ export default function useMediaCarousel(props) {
                                     position: 'absolute',
                                     display: showRightArrow ? 'flex' : 'none',
                                     top: height / 2,
-                                    left: width / 10,
+                                    left: 50,
                                     background: 'hsla(0,0%,100%,.25)',
                                     opacity: 20,
                                     border: '1px solid black',
@@ -651,6 +654,19 @@ export default function useMediaCarousel(props) {
                             </SlideAnimation>
                         </div>
                     ) : null}
+
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: -50,
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            background: "transparent"
+                        }}
+                    >
+                        {title}
+                    </div>
                     <div
                         style={{
                             position: 'absolute',
@@ -659,7 +675,7 @@ export default function useMediaCarousel(props) {
                             height: '100%',
                             display: 'flex',
                             justifyContent: 'center',
-                            background: Util.isMobile() ? "black" : "transparent"
+                            background: "transparent"
                         }}
                     >
                         <div>
