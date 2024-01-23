@@ -34,7 +34,7 @@ export default function useMediaCarousel(props) {
     const desktopSlideWidth = props.desktopSlideWidth ? props.desktopSlideWidth : undefined;
     const desktopSlideHeight = props.desktopSlideHeight ? props.desktopSlideHeight : undefined;
     const title = props.title ? props.title : null;
-    const showClose = props.showClose ? props.showClose : undefined;
+    const showClose = props.showClose !== undefined ? props.showClose : undefined;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();

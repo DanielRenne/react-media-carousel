@@ -92,7 +92,7 @@ export default function Slide(props) {
                             >
                                 {props.audioSrc ? (
                                     <audio
-                                        style={{ position: "absolute", bottom: Util.isMobile() && !hasContent && props.showNextButton ? 100 : 5, width: Util.isMobile() ? "85%" : hasContent ? "100%" : "50%" }}
+                                        style={{ position: "absolute", bottom: Util.isMobile() && !hasContent && props.showNextButton ? 100 : 5, width: Util.isMobile() ? "85%" : hasContent ? "100%" : "35%" }}
                                         controls
                                         src={props.audioSrc}
                                         onEnded={() => {
@@ -362,7 +362,7 @@ export default function Slide(props) {
                             }}
                         >
                             {media}
-                            {hasContent ? null : <div style={{ position: "absolute", width: hasAudio ? "20%" : "35%", bottom: 10, right: 20 }}>{nextButton}</div>}
+                            {hasContent ? null : <div style={{ position: "absolute", width: "30%", bottom: 10, right: 20 }}>{nextButton}</div>}
                         </div>
                         <div style={{ width: hasContent ? "3%" : "0%" }} />
                         <div
