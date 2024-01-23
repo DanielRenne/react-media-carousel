@@ -46,6 +46,7 @@ Props
     desktopSlideWidth: number (override the default width of a desktop slide.)
     desktopSlideHeight: number (override the default height of a desktop slide.)
     title: object (React object to add a title to the carousel just above the main slide.)
+    showClose: boolean: (Set to false to hide the close X in the upper right hand corner.  True by default.)
 
 
 Slide fields

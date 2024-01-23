@@ -20,6 +20,7 @@ export default function Slide(props) {
     const hasAudio = props.audioSrc && props.audioSrc !== "";
     const hasContent = (props.title && props.title !== "") || (props.story && props.story !== "");
     const story = props.story ? props.story : "";
+    const showClose = props.showClose !== undefined ? props.showClose : true;
 
     const processBulletPoints = (text) => {
 
@@ -91,7 +92,7 @@ export default function Slide(props) {
                             >
                                 {props.audioSrc ? (
                                     <audio
-                                        style={{ position: "absolute", bottom: 5, width: Util.isMobile() ? width : "100%" }}
+                                        style={{ position: "absolute", bottom: Util.isMobile() && !hasContent && props.showNextButton ? 100 : 5, width: Util.isMobile() ? "85%" : hasContent ? "100%" : "50%" }}
                                         controls
                                         src={props.audioSrc}
                                         onEnded={() => {
@@ -132,6 +133,7 @@ export default function Slide(props) {
                         }
                     }}
                     width={"100%"}
+                    height={hasContent ? "100%" : props.showNextButton ? "75%" : "100%"}
                     style={{
                         maxWidth: width
                     }}
@@ -171,7 +173,7 @@ export default function Slide(props) {
             >
                 {props.nextButton}
             </div> :
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}> <Button style={{
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}> <Button style={{
                 backgroundColor: hover ? props.theme === "dark" ? "white" : "black" : "transparent",
                 borderRadius: 6,
                 height: 45,
@@ -258,21 +260,26 @@ export default function Slide(props) {
                 }
             }}
         >
-            <Close
-                style={{
-                    cursor: "pointer",
-                    color: theme === "dark" ? "white" : "black",
-                    position: "absolute",
-                    top: 10,
-                    right: 10,
-                    zIndex: 2
-                }}
-                onClick={() => {
-                    if (props.onClose) {
-                        props.onClose();
-                    }
-                }}
-            />
+            {
+                showClose ? <Close
+                    style={{
+                        cursor: "pointer",
+                        color: theme === "dark" ? "white" : "black",
+                        position: "absolute",
+                        top: 10,
+                        right: 10,
+                        zIndex: 2
+                    }}
+                    onClick={(ev) => {
+                        ev.stopPropagation();
+                        ev.preventDefault();
+                        if (props.onClose) {
+                            props.onClose();
+                        }
+                    }}
+                /> : null
+            }
+
             {
                 Util.isMobile() ?
 
@@ -297,6 +304,7 @@ export default function Slide(props) {
                                 <div style={{ height: "100%" }}>
                                     <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>{media}</div>
                                 </div>
+                                {hasContent ? null : <div style={{ position: "absolute", width: "100%", bottom: 30, display: "flex", justifyContent: "center" }}>{nextButton}</div>}
                             </div>
                             <div
                             // style={{
@@ -334,7 +342,7 @@ export default function Slide(props) {
                                         </React.Fragment>
                                     ))}
                                 </div>
-                                {nextButton}
+                                {hasContent ? nextButton : null}
                             </div>
 
                         </div>
@@ -354,6 +362,7 @@ export default function Slide(props) {
                             }}
                         >
                             {media}
+                            {hasContent ? null : <div style={{ position: "absolute", width: hasAudio ? "20%" : "35%", bottom: 10, right: 20 }}>{nextButton}</div>}
                         </div>
                         <div style={{ width: hasContent ? "3%" : "0%" }} />
                         <div
@@ -393,7 +402,7 @@ export default function Slide(props) {
                                         ))}
                                     </div>
                                 </div>
-                                {nextButton}
+                                {hasContent ? nextButton : null}
                             </div>
 
                         </div>
