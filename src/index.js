@@ -35,6 +35,7 @@ export default function useMediaCarousel(props) {
     const desktopSlideHeight = props.desktopSlideHeight ? props.desktopSlideHeight : undefined;
     const title = props.title ? props.title : null;
     const showClose = props.showClose !== undefined ? props.showClose : undefined;
+    const customAudioPlayer = props.customAudioPlayer ? props.customAudioPlayer : undefined;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
@@ -426,6 +427,7 @@ export default function useMediaCarousel(props) {
                         <div style={{ width, height }} />
                     ) : (
                         <Slide
+                            customAudioPlayer={customAudioPlayer}
                             showClose={showClose}
                             editing={editing}
                             theme={theme}

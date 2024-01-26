@@ -3,6 +3,7 @@ import Util from "./util";
 import Button from "@mui/material/Button";
 import Close from "@mui/icons-material/Close";
 import ZoomableImage from "./zoomableImage";
+import AudioPlayer from "./audioPlayer";
 
 
 
@@ -21,6 +22,7 @@ export default function Slide(props) {
     const hasContent = (props.title && props.title !== "") || (props.story && props.story !== "");
     const story = props.story ? props.story : "";
     const showClose = props.showClose !== undefined ? props.showClose : true;
+    const customAudioPlayer = props.customAudioPlayer ? props.customAudioPlayer : undefined;
 
     const processBulletPoints = (text) => {
 
@@ -91,23 +93,59 @@ export default function Slide(props) {
                             }}
                             >
                                 {props.audioSrc ? (
-                                    <audio
-                                        style={{ position: "absolute", bottom: Util.isMobile() && !hasContent && props.showNextButton ? 100 : 5, width: Util.isMobile() ? "85%" : hasContent ? "100%" : "35%" }}
-                                        controls
-                                        src={props.audioSrc}
-                                        onEnded={() => {
-                                            if (props.onAudioEnd) {
-                                                props.onAudioEnd();
-                                            }
-                                        }}
-                                        ref={(component) => {
-                                            if (component) {
-                                                if (props.setActiveAudioPlayer) {
-                                                    props.setActiveAudioPlayer(component);
-                                                }
-                                            }
-                                        }}
-                                    ></audio>
+                                    <div style={{ width: "100%", display: "flex", justifyContent: "center", alignContent: "center" }}>
+                                        {
+                                            customAudioPlayer ? <div style={{
+                                                position: "absolute",
+                                                bottom: Util.isMobile() && !hasContent && props.showNextButton ? 100 : Util.isMobile() ? -11 : 5,
+                                                width: Util.isMobile() ? "85%" :
+                                                    hasContent ? "100%" : "35%"
+                                            }}>
+                                                <AudioPlayer
+                                                    theme={theme}
+                                                    src={props.audioSrc}
+                                                    onEnded={() => {
+                                                        if (props.onAudioEnd) {
+                                                            props.onAudioEnd();
+                                                        }
+                                                    }}
+                                                    onLoaded={(component) => {
+                                                        if (component) {
+                                                            if (props.setActiveAudioPlayer) {
+                                                                props.setActiveAudioPlayer(component);
+                                                            }
+                                                        }
+                                                    }}
+                                                />
+                                            </div> :
+                                                <audio
+                                                    style={{
+                                                        position: "absolute",
+                                                        bottom: Util.isMobile() && !hasContent && props.showNextButton ? 100 : 5,
+                                                        width: Util.isMobile() ? "85%" : hasContent ? "100%" : "35%",
+                                                        height: 30,
+                                                        paddingLeft: Util.isMobile() ? "" : 10,
+                                                        paddingRight: Util.isMobile() ? "" : 10
+                                                    }}
+                                                    controls
+                                                    src={props.audioSrc}
+                                                    onEnded={() => {
+                                                        if (props.onAudioEnd) {
+                                                            props.onAudioEnd();
+                                                        }
+                                                    }}
+                                                    ref={(component) => {
+                                                        if (component) {
+                                                            if (props.setActiveAudioPlayer) {
+                                                                props.setActiveAudioPlayer(component);
+                                                            }
+                                                        }
+                                                    }}
+                                                ></audio>
+                                        }
+
+                                    </div>
+
                                 ) : Util.isMobile() ? <div style={{ height: 54 }} /> : null}
                             </div>
                         </div>

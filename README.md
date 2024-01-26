@@ -50,6 +50,7 @@ Props
     desktopSlideHeight: number (override the default height of a desktop slide.)
     title: object (React object to add a title to the carousel just above the main slide.)
     showClose: boolean: (Set to false to hide the close X in the upper right hand corner.  True by default.)
+    customAudioPlayer: boolean: (Set to true to display a customized audio player rather than the default browser audio player.)
 
 
 Slide fields

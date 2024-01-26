@@ -180,6 +180,10 @@ const Util = {
         }
         return false;
     },
+    isSafari() {
+        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        return isSafari;
+    },
     convertObjectKeysToLowerCase(obj) {
         const convertedObject = {};
 
@@ -191,6 +195,29 @@ const Util = {
         }
 
         return convertedObject;
+    },
+    secondsToMinuteSecond(totalSeconds) {
+        if (totalSeconds === 99999999 || totalSeconds === Infinity) {
+            return "∞";
+        }
+
+        // 👇️ get number of full minutes
+        const minutes = Math.floor(totalSeconds / 60);
+
+        // 👇️ get remainder of seconds
+        const seconds = totalSeconds % 60;
+
+        function padTo2Digits(num) {
+            return num.toString().padStart(2, "0");
+        }
+
+        function padTo1Digits(num) {
+            return num.toString().padStart(1, "0");
+        }
+
+        const result = `${minutes > 9 ? padTo2Digits(minutes) : padTo1Digits(minutes)
+            }:${padTo2Digits(seconds)}`;
+        return result;
     }
 };
 
