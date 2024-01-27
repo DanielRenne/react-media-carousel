@@ -206,6 +206,7 @@ export default function useMediaCarousel(props) {
         if (activeAudioPlayer.current) {
             activeAudioPlayer.current.pause();
         }
+        setPaused(false);
     }, [activeVideoPlayer, activeAudioPlayer]);
 
     return [
