@@ -23,6 +23,7 @@ export default function Slide(props) {
     const story = props.story ? props.story : "";
     const showClose = props.showClose !== undefined ? props.showClose : true;
     const customAudioPlayer = props.customAudioPlayer ? props.customAudioPlayer : undefined;
+    const disableSwipe = props.disableSwipe ? props.disableSwipe : undefined;
 
     const processBulletPoints = (text) => {
 
@@ -279,6 +280,11 @@ export default function Slide(props) {
                 touchEndX.current = e.touches[0].clientX;
             }}
             onTouchEnd={(e) => {
+
+                if (disableSwipe) {
+                    return;
+                }
+
                 const swipeThreshold = swipeThreshld ? swipeThreshld : 50; // You can adjust this value based on your preference
 
                 const deltaX = touchEndX.current - touchStartX.current;

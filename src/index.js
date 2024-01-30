@@ -36,6 +36,7 @@ export default function useMediaCarousel(props) {
     const title = props.title ? props.title : null;
     const showClose = props.showClose !== undefined ? props.showClose : undefined;
     const customAudioPlayer = props.customAudioPlayer ? props.customAudioPlayer : undefined;
+    const disableSwipe = props.disableSwipe ? props.disableSwipe : undefined;
 
     const activeVideoPlayer = useRef();
     const activeAudioPlayer = useRef();
@@ -429,6 +430,7 @@ export default function useMediaCarousel(props) {
                     ) : (
                         <Slide
                             customAudioPlayer={customAudioPlayer}
+                            disableSwipe={disableSwipe}
                             showClose={showClose}
                             editing={editing}
                             theme={theme}
