@@ -1,6 +1,6 @@
 {
     "name": "react-media-carousel",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "A react material ui media carousel.",
     "main": "dist/index.js",
     "module": "dist/index.js",

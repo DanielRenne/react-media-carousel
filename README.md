@@ -4,7 +4,8 @@ A media carousel that supports video, photo & audio combination, a title, and st
 
 Currently this depends on React 18 and up and Material UI 5.15.
 
-Preview
+Preview:
+
 ![preview GIF](https://raw.githubusercontent.com/DanielRenne/react-media-carousel/main/media/React-Media-Carousel.gif)
 
 Installation:
