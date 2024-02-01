@@ -7,6 +7,14 @@ Currently this depends on React 18 and up and Material UI 5.15.
 Preview
 ![preview GIF](https://raw.githubusercontent.com/DanielRenne/react-media-carousel/main/media/React-Media-Carousel.gif)
 
+Installation:
+
+    npm install react-media-carousel
+
+    or
+    
+    yarn add react-media-carousel
+
 Usage Example:
 
     import useMediaCarousel from "react-media-carousel";
