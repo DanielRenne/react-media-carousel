@@ -218,6 +218,10 @@ export default function NavDots(props) {
 							}
 						}
 
+						if (props.slides.length === 1) {
+							return null;
+						}
+
 						return bullet;
 					})
 					: null}
