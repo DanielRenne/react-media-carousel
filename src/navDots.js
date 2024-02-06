@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import PlayIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
+import { max } from "@floating-ui/utils";
 
 export default function NavDots(props) {
 	const dotStyles = `.dot-container {
@@ -28,6 +29,12 @@ export default function NavDots(props) {
 			background-color: #bbb;
 	}`;
 
+	const playWidth = 60;
+	const nextPrevWidth = 60;
+	const dotWidth = 26;
+	var subtractionWidth = 0;
+	var maxDots = props.slides ? props.slides.length : 9999;
+
 	const slideShow = props.slideShow ? props.slideShow : undefined;
 
 	const centerInteger = (length) => {
@@ -42,7 +49,7 @@ export default function NavDots(props) {
 		}
 	}
 
-	const playButton = centerInteger(props.slides ? props.slides.length : 0)
+
 	const playButtonSize = 40;
 	var playButtonDom = (index) => (
 
@@ -169,12 +176,21 @@ export default function NavDots(props) {
 	if (props.slides && props.slides.length < 2) {
 		prevButton = null;
 		nextbutton = null;
+	} else {
+		subtractionWidth = nextPrevWidth;
 	}
 
 	if (!slideShow) {
 		prevButton = null;
 		nextbutton = null;
+	} else {
+		subtractionWidth = nextPrevWidth + playWidth
 	}
+
+	var availableSpace = window.innerWidth - subtractionWidth;
+	var maxDots = Math.floor(availableSpace / dotWidth);
+
+	const playButton = centerInteger(props.slides ? props.slides.length > maxDots ? maxDots : props.slides.length : 0)
 
 	return (
 		<div>
@@ -219,6 +235,10 @@ export default function NavDots(props) {
 						}
 
 						if (props.slides.length === 1) {
+							return null;
+						}
+
+						if (i >= (maxDots)) {
 							return null;
 						}
 
