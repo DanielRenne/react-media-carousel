@@ -24,16 +24,27 @@ export default function Slide(props) {
     const disableSwipe = props.disableSwipe ? props.disableSwipe : undefined;
 
     const handlers = useSwipeable({
-        onSwipedLeft: (eventData) => {
+        onSwipedLeft: () => {
             if (props.onSwipeLeft) {
                 props.onSwipeLeft();
             }
         },
-        onSwipedRight: (eventData) => {
+        onSwipedRight: () => {
             if (props.onSwipeRight) {
                 props.onSwipeRight();
             }
         },
+        onSwipedUp: () => {
+            if (props.onClose) {
+                props.onClose();
+            }
+        },
+        onSwipedDown: () => {
+            if (props.onClose) {
+                props.onClose();
+            }
+        },
+
     });
 
     const processBulletPoints = (text) => {
