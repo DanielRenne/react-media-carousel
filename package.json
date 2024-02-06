@@ -1,6 +1,6 @@
 {
     "name": "react-media-carousel",
-    "version": "1.0.34",
+    "version": "1.0.35",
     "description": "A react material ui media carousel.",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -25,8 +25,8 @@
         "url": "https://github.com/DanielRenne/react-media-carousel"
     },
     "peerDependencies": {
-        "react": "^18.2.0",
         "@types/react": "^18.2.0",
+        "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
@@ -37,8 +37,8 @@
         "@babel/preset-typescript": "^7.8.3",
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.10.6",
-        "@mui/material": "^5.15.0",
         "@mui/icons-material": "^5.15.0",
+        "@mui/material": "^5.15.0",
         "babel-jest": "^25.4.0",
         "babel-loader": "^8.1.0",
         "eslint": "^5.16.0",
@@ -53,5 +53,8 @@
         "webpack": "^4.42.1",
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.11.2"
+    },
+    "dependencies": {
+        "react-swipeable": "^7.0.1"
     }
 }

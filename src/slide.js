@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Close from "@mui/icons-material/Close";
 import ZoomableImage from "./zoomableImage";
 import AudioPlayer from "./audioPlayer";
+import { useSwipeable } from "react-swipeable";
 
 
 
@@ -14,16 +15,26 @@ export default function Slide(props) {
     const fontFamily = props.fontFamily ? props.fontFamily : "";
     const fontSize = props.fontSize ? props.fontSize : 16;
     const fontWeight = props.fontWeight ? props.fontWeight : "";
-    const swipeThreshld = props.swipeThreshold;
     const [hover, setHover] = useState();
-    const touchStartX = useRef(0);
-    const touchEndX = useRef(0);
     const hasAudio = props.audioSrc && props.audioSrc !== "";
     const hasContent = (props.title && props.title !== "") || (props.story && props.story !== "");
     const story = props.story ? props.story : "";
     const showClose = props.showClose !== undefined ? props.showClose : true;
     const customAudioPlayer = props.customAudioPlayer ? props.customAudioPlayer : undefined;
     const disableSwipe = props.disableSwipe ? props.disableSwipe : undefined;
+
+    const handlers = useSwipeable({
+        onSwipedLeft: (eventData) => {
+            if (props.onSwipeLeft) {
+                props.onSwipeLeft();
+            }
+        },
+        onSwipedRight: (eventData) => {
+            if (props.onSwipeRight) {
+                props.onSwipeRight();
+            }
+        },
+    });
 
     const processBulletPoints = (text) => {
 
@@ -254,6 +265,7 @@ export default function Slide(props) {
 
     return (
         <div
+            {...handlers}
             style={{
                 background: theme === "dark" ? "#212121" : "white",
                 borderRadius: 15,
@@ -266,42 +278,6 @@ export default function Slide(props) {
             onClick={(ev) => {
                 ev.preventDefault();
                 ev.stopPropagation();
-            }}
-            onTouchStart={(e) => {
-                if (e.touches.length === 0) {
-                    return;
-                }
-                touchStartX.current = e.touches[0].clientX;
-            }}
-            onTouchMove={(e) => {
-                if (e.touches.length === 0) {
-                    return;
-                }
-                touchEndX.current = e.touches[0].clientX;
-            }}
-            onTouchEnd={(e) => {
-
-                if (disableSwipe) {
-                    return;
-                }
-
-                const swipeThreshold = swipeThreshld ? swipeThreshld : 50; // You can adjust this value based on your preference
-
-                const deltaX = touchEndX.current - touchStartX.current;
-
-                if (deltaX > swipeThreshold) {
-                    // Swipe right
-                    if (props.onSwipeRight) {
-                        props.onSwipeRight();
-                    }
-
-                } else if (deltaX < -swipeThreshold) {
-                    // Swipe left
-                    if (props.onSwipeLeft) {
-                        props.onSwipeLeft();
-                    }
-
-                }
             }}
         >
             {
