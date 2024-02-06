@@ -205,7 +205,7 @@ const Util = {
         const minutes = Math.floor(totalSeconds / 60);
 
         // 👇️ get remainder of seconds
-        const seconds = totalSeconds % 60;
+        const seconds = Math.floor(totalSeconds % 60);
 
         function padTo2Digits(num) {
             return num.toString().padStart(2, "0");
