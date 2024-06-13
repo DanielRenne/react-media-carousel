@@ -1,6 +1,6 @@
 React Media Carousel
 
-A media carousel that supports video, photo & audio combination, a title, and story.  Keyboard left, right, arrows and spacebar for pause/playback.  Auto slide show when video and audio playback completes.  CSS animation for transitions.
+A media carousel that supports video, photo & audio combination, a title, and story. Keyboard left, right, arrows and spacebar for pause/playback. Auto slide show when video and audio playback completes. CSS animation for transitions.
 
 Currently this depends on React 18 and up and Material UI 5.15.
 
@@ -13,7 +13,7 @@ Installation:
     npm install react-media-carousel
 
     or
-    
+
     yarn add react-media-carousel
 
 Usage Example:
@@ -61,7 +61,7 @@ Props
     showClose: boolean: (Set to false to hide the close X in the upper right hand corner.  True by default.)
     customAudioPlayer: boolean: (Set to true to display a customized audio player rather than the default browser audio player.)
     disableSwipe: boolean (Set to true to disable swipe events.)
-
+    enableMarkdown: bool (markdown supported)
 
 Slide fields
 
@@ -69,9 +69,9 @@ Slide fields
     title: string,
     src: string (url of the photo or video),
     mediaType: string ("photo" or "video"),
-    audioSrc: string (url of the audio for the slide.  Optional)
+    audioSrc: string (url of the audio for the slide.  Optional),
 
 Supported story special characters
 
     \n : Will generate a new line with <br/>,
-    &bull; : Will generate a bullet point with &bull; injected into the DOM. 
+    &bull; : Will generate a bullet point with &bull; injected into the DOM.
