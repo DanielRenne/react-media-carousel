@@ -1,12 +1,12 @@
 {
     "name": "react-media-carousel",
-    "version": "1.0.37",
+    "version": "1.0.38",
     "description": "A react material ui media carousel.",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "jsnext:main": "dist/index.js",
     "scripts": {
-        "build": "webpack -p",
+        "build": "webpack",
         "prepublishOnly": "npm run build"
     },
     "files": [
