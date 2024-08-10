@@ -13,8 +13,9 @@ export default function Slide(props) {
   const height = props.height
     ? props.height
     : Util.isMobile()
-    ? window.innerHeight - 150
-    : 600;
+      ? window.innerHeight - 150
+      : 600;
+  const shouldContain = window.innerWidth < 400 && window.innerHeight < 700 && Util.isApp();
   const theme = props.theme;
   const fontFamily = props.fontFamily ? props.fontFamily : "";
   const fontSize = props.fontSize ? props.fontSize : 16;
@@ -112,7 +113,7 @@ export default function Slide(props) {
                       : props.height / 2 - 10
                     : props.height - 120,
                   display: "block",
-                  objectFit: "cover",
+                  objectFit: shouldContain ? "contain" : "cover",
                 }}
                 src={props.src}
               />
@@ -142,13 +143,13 @@ export default function Slide(props) {
                           Util.isMobile() && !hasContent && props.showNextButton
                             ? 100
                             : Util.isMobile()
-                            ? -11
-                            : 5,
+                              ? -11
+                              : 5,
                         width: Util.isMobile()
                           ? "85%"
                           : hasContent
-                          ? "100%"
-                          : "35%",
+                            ? "100%"
+                            : "35%",
                       }}
                     >
                       <AudioPlayer
@@ -179,8 +180,8 @@ export default function Slide(props) {
                         width: Util.isMobile()
                           ? "85%"
                           : hasContent
-                          ? "100%"
-                          : "35%",
+                            ? "100%"
+                            : "35%",
                         height: 30,
                         paddingLeft: Util.isMobile() ? "" : 10,
                         paddingRight: Util.isMobile() ? "" : 10,
@@ -233,12 +234,12 @@ export default function Slide(props) {
         style={{
           maxWidth: width,
         }}
-        // height={
-        //   Screen.isMobile()
-        //     ? window.innerHeight -
-        //       (props.caption && props.caption !== "" ? 200 : 150)
-        //     : window.innerHeight - 250
-        // }
+      // height={
+      //   Screen.isMobile()
+      //     ? window.innerHeight -
+      //       (props.caption && props.caption !== "" ? 200 : 150)
+      //     : window.innerHeight - 250
+      // }
       >
         <source src={props.src + "#t=0.001"} />
       </video>
@@ -253,7 +254,7 @@ export default function Slide(props) {
             : props.height / 2 - 10
           : props.height - 120,
         display: "block",
-        objectFit: "cover",
+        objectFit: shouldContain ? "contain" : "cover",
       }}
       src={props.src}
     />
@@ -323,8 +324,8 @@ export default function Slide(props) {
                   ? "black"
                   : "white"
                 : props.theme === "dark"
-                ? "white"
-                : "black",
+                  ? "white"
+                  : "black",
               width: "100%",
             }}
           >
